@@ -1,0 +1,32 @@
+# Gradle files
+.gradle/
+build/
+*/build/
+
+# Local configuration file (user-specific settings)
+local.properties
+
+# IntelliJ
+.idea/
+
+# Android Studio
+.android/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Gradle Wrapper
+gradle-wrapper.jar
+
+# Android Studio specific
+out/
+
+# .iml files (IntelliJ IDEA specific)
+*.iml
+
+# Android Lint
+lint-report/
+
+# Android-specific build directory
+*/gradle-wrapper.jar
