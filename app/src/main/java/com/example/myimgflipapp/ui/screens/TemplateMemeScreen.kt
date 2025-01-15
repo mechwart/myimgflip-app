@@ -1,5 +1,6 @@
 package com.example.myimgflipapp.ui.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,28 +27,32 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil3.compose.AsyncImage
-import com.example.myimgflipapp.data.remote.dto.MemeDto
-
-
+import com.example.myimgflipapp.data.remote.dto.GetMemeDto
 
 
 @Composable
 fun MemeScreen(viewModel: MemeViewModel = hiltViewModel(), modifier: Modifier) {
     val memes = viewModel.memes.collectAsState(initial = emptyList())
+    val context = LocalContext.current
+    val memeState by viewModel.memeState
 
     LazyColumn(modifier = modifier) {
         items(memes.value) { meme ->
-            MemeItem(meme = meme)
+            MemeItem(viewModel = viewModel,meme = meme)
+        }
+        memeState?.let { meme ->
+            Toast.makeText(context, "Meme saved: ${meme.imageUrl}", Toast.LENGTH_SHORT).show()
         }
     }
 }
 
 @Composable
-fun MemeItem(meme: MemeDto) {
+fun MemeItem(viewModel: MemeViewModel,meme: GetMemeDto) {
     val textFields = remember { mutableStateListOf("") }
     var showDialog by remember { mutableStateOf(false) }
 
@@ -117,8 +122,14 @@ fun MemeItem(meme: MemeDto) {
                                     Text("Cancel")
                                 }
                                 TextButton(onClick = {
-                                    println("Texts: $textFields")
                                     showDialog = false
+                                    viewModel.createMeme(
+                                        meme.id,
+                                        "MechwarT",
+                                        "ricsi0119",
+                                        textFields[0],
+                                        textFields[1]
+                                    )
                                 }) {
                                     Text("Submit")
                                 }
