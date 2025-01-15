@@ -1,6 +1,6 @@
 package com.example.myimgflipapp.data.remote.dto
 
-data class MemeDto(
+data class GetMemeDto(
     val id: String,
     val name: String,
     val url: String,
