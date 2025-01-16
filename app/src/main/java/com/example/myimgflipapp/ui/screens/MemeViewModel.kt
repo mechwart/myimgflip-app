@@ -1,8 +1,8 @@
 package com.example.myimgflipapp.ui.screens
 
 import android.util.Log
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myimgflipapp.data.db.Meme
@@ -21,7 +21,6 @@ class MemeViewModel @Inject constructor(private val memeRepository: MemeReposito
     val memes: StateFlow<List<GetMemeDto>> get() = _memes
 
     private val _memeState = mutableStateOf<Meme?>(null)
-    val memeState: State<Meme?> get() = _memeState
 
     init {
         fetchMemes()
@@ -48,10 +47,13 @@ class MemeViewModel @Inject constructor(private val memeRepository: MemeReposito
 
             result.onSuccess { meme ->
                 _memeState.value = meme
-
             }.onFailure { exception ->
                 Log.e("MemeViewModel", "Error: ${exception.message}")
             }
         }
+    }
+
+    fun getLastMeme(username: String): LiveData<Meme> {
+        return memeRepository.getLastMemeForUser(username)
     }
 }

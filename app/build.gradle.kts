@@ -15,8 +15,8 @@ android {
         applicationId = "com.example.myimgflipapp"
         minSdk = 35
         targetSdk = 35
-        versionCode = 2
-        versionName = "1.1"
+        versionCode = 3
+        versionName = "1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -63,17 +63,23 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     implementation("com.google.dagger:hilt-android:2.51.1")
     implementation(libs.androidx.foundation.android)
+    implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.espresso.core)
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
     implementation(libs.ui)
     implementation(libs.androidx.material)
     implementation(libs.ui.tooling.preview)
 
     //Room dependencies
-    val room_version = "2.5.0"
 
-    implementation("androidx.room:room-runtime:$room_version")
-    ksp("androidx.room:room-compiler:$room_version")
-    implementation("androidx.room:room-ktx:$room_version")
+    implementation("androidx.room:room-runtime:2.5.0")
+    ksp("androidx.room:room-compiler:2.5.0")
+    implementation("androidx.room:room-ktx:2.5.0")
+
+
+    //Compose dependencies
+    implementation("androidx.compose.material:material-icons-extended:1.5.1")
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
