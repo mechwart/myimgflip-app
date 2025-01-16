@@ -1,5 +1,6 @@
 package com.example.myimgflipapp.data.repository
 
+import androidx.lifecycle.LiveData
 import com.example.myimgflipapp.data.db.Meme
 import com.example.myimgflipapp.data.db.MemeDao
 import com.example.myimgflipapp.data.remote.MemeApiService
@@ -41,11 +42,7 @@ class MemeRepository @Inject constructor(private val memeDao: MemeDao,
         }
     }
 
-    fun getMemeById(id: Int): Meme? {
-        return memeDao.getMemesById(id)
-    }
-
-    fun getAllMemes(): List<Meme> {
-        return memeDao.getAllMemes()
+    fun getLastMemeForUser(username: String): LiveData<Meme> {
+        return memeDao.getLastMemeForUser(username)
     }
 }
