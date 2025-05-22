@@ -28,5 +28,5 @@ out/
 # Android Lint
 lint-report/
 
-# Android-specific build directory
-*/gradle-wrapper.jar
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
