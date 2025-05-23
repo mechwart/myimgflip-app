@@ -6,7 +6,8 @@ jobs:
     build:
 
         runs-on: ubuntu-latest
-
+        outputs:
+            setting-file: ${{ steps.publish.outputs.setting-file }}
         steps:
         - uses: actions/checkout@v4
         - name: set up JDK 17
@@ -20,6 +21,9 @@ jobs:
           run: chmod +x gradlew
         - name: Build with Gradle
           run: ./gradlew build
+        - name: Publish Kotlin filename
+          id: publish
+          run: find *.kts -type f -execdir echo 'setting-file={}' >> $GITHUB_OUTPUT ';'
         - name: Upload Artifacts
           uses: actions/upload-artifact@v4
           with:
@@ -35,5 +39,7 @@ jobs:
                 name: settings
             - name: Output contents
               run: ls
+            - name: Output filename
+              run: echo "${{ needs.build.outputs.setting-file }}"
             - name: Deploy
               run: echo "Deploying..."
