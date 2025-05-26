@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-report
-          path: build\reports\problems\problems-report.html
+          path: problems-report.html
       - name: Output Secret Value
         run: echo "MY_SECRET ${{env.ANDROID_PASSWORD}}"   
     deploy:
