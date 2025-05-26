@@ -29,7 +29,6 @@ jobs:
         id: publish
         run: find *.kts -type f -execdir echo 'setting-file={}' >> $GITHUB_OUTPUT ';'
       - name: Upload Test Report
-        if: failure() && steps.build-app.outcome == 'failure'
         uses: actions/upload-artifact@v4
         with:
           name: test-report
