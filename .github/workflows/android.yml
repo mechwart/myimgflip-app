@@ -55,6 +55,7 @@ jobs:
                 echo "MY_FIRST_SECRET  ${{env.ANDROID_PASSWORD}}"
                 echo "MY_SECOND_SECRET  ${{env.DUMMY_VALUE_FIRST}}"
     report:
+      needs: [build, deploy]
       if: failure()
       runs-on: ubuntu-latest
       steps:
