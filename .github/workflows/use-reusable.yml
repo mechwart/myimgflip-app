@@ -38,6 +38,8 @@ jobs:
     deploy:
         needs: build 
         uses: ./.github/workflows/reusable.yml
+        with:
+          artifact-name: test-report
     report:
       needs: [build, deploy]
       if: failure()
