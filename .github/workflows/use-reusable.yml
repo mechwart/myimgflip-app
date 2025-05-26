@@ -40,6 +40,12 @@ jobs:
         uses: ./.github/workflows/reusable.yml
         with:
           artifact-name: test-report
+    print-deploy-result:
+      needs: deploy
+      runs-on: ubuntu-latest
+      steps:
+        - name:
+          run: echo "${{ needs.deploy.outputs.result }}"
     report:
       needs: [build, deploy]
       if: failure()
