@@ -23,15 +23,17 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
+        id: build-app
         run: ./gradlew build
       - name: Publish Kotlin filename
         id: publish
         run: find *.kts -type f -execdir echo 'setting-file={}' >> $GITHUB_OUTPUT ';'
-      - name: Upload Artifacts
+      - name: Upload Test Report
+        if: failure() && steps.build-app.outcome == 'failure'
         uses: actions/upload-artifact@v4
         with:
-          name: settings
-          path: settings.gradle.kts
+          name: test-report
+          path: build\reports\problems\problems-report.html
       - name: Output Secret Value
         run: echo "MY_SECRET ${{env.ANDROID_PASSWORD}}"   
     deploy:
@@ -41,7 +43,7 @@ jobs:
             - name: Get build artifacts
               uses: actions/download-artifact@v4
               with:
-                name: settings
+                name: test-report
             - name: Output contents
               run: ls
             - name: Output filename
