@@ -54,3 +54,11 @@ jobs:
               run: |
                 echo "MY_FIRST_SECRET  ${{env.ANDROID_PASSWORD}}"
                 echo "MY_SECOND_SECRET  ${{env.DUMMY_VALUE_FIRST}}"
+    report:
+      if: failure()
+      runs-on: ubuntu-latest
+      steps:
+        - name: Output Information
+          run: |
+            echo "Something went wrong"
+            echo "${{ github }}"           
