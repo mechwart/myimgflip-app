@@ -1,7 +1,5 @@
 # Gradle files
 .gradle/
-build/
-*/build/
 
 # Local configuration file (user-specific settings)
 local.properties
