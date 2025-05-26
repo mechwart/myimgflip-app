@@ -48,3 +48,7 @@ jobs:
               run: echo "${{ needs.build.outputs.setting-file }}"
             - name: Deploy
               run: echo "Deploying..."
+            - name: Output Information
+              run: |
+                echo "MY_FIRST_SECRET  ${{env.DUMMY_VALUE_SECOND}}"
+                echo "MY_SECOND_SECRET  ${{env.DUMMY_VALUE_FIRST}}"
