@@ -5,9 +5,13 @@ on:
       name:
         type: choice
         description: Which agent are you?
+        default: 'apple'
         options:
         - orange
         - apple
+  schedule:
+    - cron: '30 5,17 * * *'
+
 jobs:
   first-job:
     runs-on: ubuntu-latest
