@@ -30,6 +30,7 @@ jobs:
         run: find *.kts -type f -execdir echo 'setting-file={}' >> $GITHUB_OUTPUT ';'
       - name: Upload Test Report
         uses: actions/upload-artifact@v4
+        if: ${{ success() }}
         with:
           name: test-report
           path: ~/**/problems-report.html
