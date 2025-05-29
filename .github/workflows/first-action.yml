@@ -2,6 +2,15 @@ name: First Workflow
 on: 
   workflow_dispatch:
     inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'testing'
+      enableFeatureX:
+        description: 'Enable feature Dummy'
+        required: false
+        type: 'boolean'
+        default: false
       name:
         type: choice
         description: Which agent are you?
@@ -20,3 +29,7 @@ jobs:
         run: echo "Hello ${{ inputs.name }}!"
       - name: Print goodbye
         run: echo "Done - bye!"
+      - name: Print the environment
+        run: echo "The action started on ${{ inputs.environment }}"
+      - name: Print the feature out
+        run: echo "The feature is ${{ inputs.enableFeatureX }} on ${{ inputs.environment }} "  
